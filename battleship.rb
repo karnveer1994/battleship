@@ -10,6 +10,7 @@ class Battleship
     place_the_ships(@p2_matrix, p2_ship_positions)
     shoot_missiles(@p2_matrix, p1_moves)
     shoot_missiles(@p1_matrix, p2_moves)
+    generate_output
   end
 
   private
@@ -59,7 +60,6 @@ class Battleship
   end
 
   def generate_output
-
     File.open("output.txt", "w") do |file|
       file.puts "Player1"
       p1_matrix.each { |row| file.puts row.join(" ") }
