@@ -8,11 +8,25 @@ class Battleship
   def execute
     place_the_ships(@p1_matrix, p1_ship_positions)
     place_the_ships(@p2_matrix, p2_ship_positions)
+    shoot_missiles(@p2_matrix, p1_moves)
+    shoot_missiles(@p1_matrix, p2_moves)
   end
 
   def place_the_ships(matrix, positions)
     positions.each do |position|
       position.each_slice(2) { |x,y| matrix[x][y] = "B" }
+    end
+  end
+
+  def shoot_missiles(matrix, moves)
+    moves.each do |move|
+      x, y = move
+      case matrix[x][y]
+      when "B"
+        matrix[x][y] = "X"
+      when "_"
+        matrix[x][y] = "O"
+      end
     end
   end
 
