@@ -55,6 +55,36 @@ class Battleship
   def get_moves(file)
     file.readline.chomp.split(':').map { |move| move.split(',').map(&:to_i) }
   end
+
+  def generate_output
+    File.open("output.txt", "w") do |file|
+      file.puts "Player1"
+      p1_matrix.each { |row| file.puts row.join(" ") }
+      file.puts
+  
+      file.puts "Player2"
+      p2_matrix.each { |row| file.puts row.join(" ") }
+      file.puts
+  
+      p1_hits = total_hits(p1_matrix)
+      p2_hits = total_hits(p2_matrix)
+  
+      file.puts "P1:#{p1_hits}"
+      file.puts "P2:#{p2_hits}"
+      
+      if p1_hits > p2_hits
+        file.puts "Player 1 wins"
+      elsif p2_hits > p1_hits
+        file.puts "Player 2 wins"
+      else
+        file.puts "It is a draw"
+      end
+    end
+  end
+
+  def total_hits(matrix)
+    matrix.flatten.count("X")
+  end
 end
 
 battleship = Battleship.new('input.txt')
