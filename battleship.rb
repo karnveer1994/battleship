@@ -12,6 +12,8 @@ class Battleship
     shoot_missiles(@p1_matrix, p2_moves)
   end
 
+  private
+
   def place_the_ships(matrix, positions)
     positions.each do |position|
       position.each_slice(2) { |x,y| matrix[x][y] = "B" }
@@ -57,6 +59,7 @@ class Battleship
   end
 
   def generate_output
+
     File.open("output.txt", "w") do |file|
       file.puts "Player1"
       p1_matrix.each { |row| file.puts row.join(" ") }
