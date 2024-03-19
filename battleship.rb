@@ -5,6 +5,17 @@ class Battleship
     get_input(file_path)
   end
 
+  def execute
+    place_the_ships(@p1_matrix, p1_ship_positions)
+    place_the_ships(@p2_matrix, p2_ship_positions)
+  end
+
+  def place_the_ships(matrix, positions)
+    positions.each do |position|
+      position.each_slice(2) { |x,y| matrix[x][y] = "B" }
+    end
+  end
+
   def get_input(file_path)
     File.open(file_path, "r") do |file|
       grid_size = file.readline.to_i
@@ -33,3 +44,4 @@ class Battleship
 end
 
 battleship = Battleship.new('input.txt')
+battleship.execute
